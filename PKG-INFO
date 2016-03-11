@@ -1,7 +1,7 @@
-Metadata-Version: 0.1
+Metadata-Version: 1.1
 Name: cmds
-Version: 0.1
-Summary: Cmds for Python
+Version: 0.1.1
+Summary: cmds for Python
 Home-page: https://github.com/qiueer/cmds
 Author: qiueer
 Author-email: qiujqin@163.com
@@ -18,6 +18,12 @@ Description: cmds for python
         Install using pip::
         
             pip install cmds
+            
+        Install using source code::
+        
+        	git clone https://github.com/qiueer/cmds
+        	cd cmds
+        	python setup.py install
         
         
         Usage
@@ -33,14 +39,14 @@ Description: cmds for python
         
             >>> cmds('ls . ').cmds('grep ".pyc"')
             cmds.pyc
-
+        
         Warning
         -------
         
         Please note that this library uses ``shell=True`` under the hood. This means
         that this library is **NOT** suitable for running untrusted commands.
         `(See explanation) <https://docs.python.org/2/library/subprocess.html#frequently-used-arguments>`_
-
+        
         Support + Contributing
         ----------------------
         
@@ -48,8 +54,8 @@ Description: cmds for python
         
         https://github.com/qiueer/cmds
         
-Platform: Ubuntu / Redhat
-Classifier: Development Status :: 1 - Production/Stable
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)
 Classifier: Operating System :: POSIX

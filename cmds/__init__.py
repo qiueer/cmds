@@ -17,9 +17,9 @@ class cmds(object):
         self.stdout = None
         self.stderr = None
         self.retcode = 0
-        self.cmd(*args, **kwargs)
+        self.cmds(*args, **kwargs)
         
-    def cmd(self, command, env=None, stdout=PIPE, stderr=PIPE, timeout=None):
+    def cmds(self, command, env=None, stdout=PIPE, stderr=PIPE, timeout=None):
             
             if platform.system() == "Linux":
                     self.ps = Popen(command, stdout=stdout, stdin=PIPE, stderr=stderr, shell=True)
@@ -59,12 +59,12 @@ class cmds(object):
     
     def stdo(self):
         if self.stdout:
-            return self.stdout.strip().decode(encoding='UTF-8')
+            return self.stdout.strip().decode('UTF-8')
         return ''
     
     def stde(self):
         if self.stderr:
-            return self.stderr.strip().decode(encoding='UTF-8')
+            return self.stderr.strip().decode('UTF-8')
         return ''
     
     def code(self):
