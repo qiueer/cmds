@@ -10,8 +10,10 @@ import signal
 
 from subprocess import PIPE, Popen
 
-class cmd(object):
+class cmds(object):
+    
     def __init__(self, *args, **kwargs):
+        self.ps = None
         self.stdout = None
         self.stderr = None
         self.retcode = 0
@@ -19,31 +21,39 @@ class cmd(object):
         
     def cmd(self, command, env=None, stdout=PIPE, stderr=PIPE, timeout=None):
             
-            ps = None
             if platform.system() == "Linux":
-                    ps = Popen(command, stdout=stdout, stderr=stderr, shell=True)
+                    self.ps = Popen(command, stdout=stdout, stdin=PIPE, stderr=stderr, shell=True)
             else:
-                    ps = Popen(command, stdout=stdout, stderr=stdout, shell=False)
+                    self.ps = Popen(command, stdout=stdout, stdin=PIPE, stderr=stdout, shell=False)
             
             if timeout:
                 start = datetime.datetime.now()
-                while ps.poll() is None:
+                while self.ps.poll() is None:
                         time.sleep(0.2)
                         now = datetime.datetime.now()
                         if (now - start).seconds > timeout:
-                                os.kill(ps.pid, signal.SIGINT)
+                                os.kill(self.ps.pid, signal.SIGINT)
                                 self.retcode = -1
                                 self.stdout = None
                                 self.stderr = None
                                 return self
 
-            (self.stdout, self.stderr) =ps.communicate()
-            self.retcode = ps.returncode
-
+            kwargs = {'input': self.stdout}
+            (self.stdout, self.stderr) = self.ps.communicate(**kwargs)
+            self.retcode = self.ps.returncode
             return self
+        
+    def __repr__(self):
+        return self.stdo()
 
+    def __unicode__(self):
+        return self.stdo()
+    
     def __str__(self):
-        import json
+        try:
+            import simplejson as json
+        except:
+            import json
         res = {"stdout":self.stdout, "stderr": self.stderr, "retcode": self.retcode}
         return  json.dumps(res, separators=(',', ':'), ensure_ascii=False).encode('utf-8') 
     
@@ -59,4 +69,5 @@ class cmd(object):
     
     def code(self):
         return self.retcode
+
 
