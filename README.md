@@ -8,6 +8,11 @@
 
 ## 安装方法
 ```
+1）源码安装：
+git clone https://github.com/qiueer/cmds
+cd cmds
+python setup.py install
+2）pip安装
 pip install cmds
 ```
 
