@@ -70,4 +70,3 @@ class cmds(object):
     def code(self):
         return self.retcode
 
-

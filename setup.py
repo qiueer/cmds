@@ -2,7 +2,7 @@
 # # coding: utf-8
 from setuptools import find_packages, setup
 
-with open('README.rst') as readme:
+with open('README.md') as readme:
     long_description = readme.read()
 
 setup(
