@@ -28,7 +28,6 @@ class cmd(object):
             if timeout:
                 start = datetime.datetime.now()
                 while ps.poll() is None:
-                        print "check timeout,timeout:%s" %(timeout)
                         time.sleep(0.2)
                         now = datetime.datetime.now()
                         if (now - start).seconds > timeout:
